@@ -1,4 +1,11 @@
+require 'csv'
 require_relative 'smogon-api/lib/smogon'
+
+pokedex = CSV.read("pokemon.csv")
+
+prng = Random.new()
+
+puts prng.rand(2..722)
 
 team = ""
 
@@ -21,4 +28,4 @@ ARGV.each do |pokemon|
 	team = team + text + "\n\n" 
 end
 
-IO.write("team.txt", team)
+#IO.write("team.txt", team)
