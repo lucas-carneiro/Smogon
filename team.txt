@@ -18,10 +18,19 @@ Adamant Nature
 
 Blastoise @ Blastoisinite
 Ability: Rain Dish
-EVs: 56 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 200 Spe
+EVs: 236 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 20 Spe
 Modest Nature
+- Rapid Spin
 - Hydro Pump
 - Dark Pulse
 - Aura Sphere
-- Dragon Pulse
+
+Mew @ Leftovers
+Ability: Synchronize
+EVs: 252 HP / 0 Atk / 104 Def / 0 SpA / 0 SpD / 152 Spe
+Impish Nature
+- Defog
+- Soft-Boiled
+- Will-O-Wisp
+- Knock Off
 
