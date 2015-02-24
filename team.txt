@@ -1,0 +1,27 @@
+Venusaur @ Venusaurite
+Ability: Chlorophyll
+EVs: 252 HP / 0 Atk / 240 Def / 0 SpA / 0 SpD / 16 Spe
+Bold Nature
+- Giga Drain
+- Sludge Bomb
+- Synthesis
+- Hidden Power Fire
+
+Charizard @ Charizardite X
+Ability: Blaze
+EVs: 144 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 112 Spe
+Adamant Nature
+- Dragon Dance
+- Dragon Claw
+- Earthquake
+- Roost
+
+Blastoise @ Blastoisinite
+Ability: Rain Dish
+EVs: 56 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 200 Spe
+Modest Nature
+- Hydro Pump
+- Dark Pulse
+- Aura Sphere
+- Dragon Pulse
+
