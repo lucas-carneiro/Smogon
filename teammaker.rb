@@ -14,6 +14,9 @@ module Teammaker
 			pokemon = Tools.nationalNumToName(pokemon.to_i)
 		end
 		pokemon = pokemon.capitalize
+		if (pokemon == "Meowstic")
+			pokemon = "Meowstic-m"
+		end
 		text = ""
 		movesets = Smogon::Movesetdex.get pokemon, tier, gen
 		if(movesets == nil)
@@ -25,6 +28,9 @@ module Teammaker
 			if (moveset.tier == "LC" && noLC)
 				puts "#{pokemon} is tier Little Cup!"
 				return ""
+			end
+			if (pokemon == "Meowstic-m")
+				pokemon = "Meowstic"
 			end
 			text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 					"Ability: #{moveset.ability[0]}\n" \
