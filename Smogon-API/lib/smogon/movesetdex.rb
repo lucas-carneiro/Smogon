@@ -69,15 +69,20 @@ module Smogon
             end
 
             moveset.evs = [].tap do |evs|
-              values = Array.new(6)
-              values[0] = movesetdex['evconfigs'].first['hp'].to_s + " HP"
-              values[1] = movesetdex['evconfigs'].first['patk'].to_s + " Atk"
-              values[2] = movesetdex['evconfigs'].first['pdef'].to_s + " Def"
-              values[3] = movesetdex['evconfigs'].first['spatk'].to_s + " SpA"
-              values[4] = movesetdex['evconfigs'].first['spdef'].to_s + " SpD"
-              values[5] = movesetdex['evconfigs'].first['spe'].to_s + " Spe"
-              values.each do |value|
-                evs << value
+              evconfigs = movesetdex['evconfigs'].first
+              if (evconfigs == nil)
+                evs << "0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe"
+              else
+                values = Array.new(6)
+                values[0] = evconfigs['hp'].to_s + " HP"
+                values[1] = evconfigs['patk'].to_s + " Atk"
+                values[2] = evconfigs['pdef'].to_s + " Def"
+                values[3] = evconfigs['spatk'].to_s + " SpA"
+                values[4] = evconfigs['spdef'].to_s + " SpD"
+                values[5] = evconfigs['spe'].to_s + " Spe"
+                values.each do |value|
+                  evs << value
+                end
               end
             end.join ' / '
           end
