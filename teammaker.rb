@@ -29,11 +29,10 @@ module Teammaker
 			text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 					"Ability: #{moveset.ability[0]}\n" \
 					"EVs: #{moveset.evs}\n" \
-					"#{moveset.nature[0]} Nature\n" \
-					"- #{moveset.moves[0][0]}\n" \
-					"- #{moveset.moves[1][0]}\n" \
-					"- #{moveset.moves[2][0]}\n" \
-					"- #{moveset.moves[3][0]}"
+					"#{moveset.nature[0]} Nature\n"
+			moveset.moves.each do |move|
+				text = text + "- #{move[0]}\n"
+			end
 			puts text
 		else
 			if (tryagainTIER)
@@ -50,7 +49,7 @@ module Teammaker
 				return ""
 			end
 		end
-		text = text + "\n\n"
+		text = text + "\n"
 		return text
 	end
 
