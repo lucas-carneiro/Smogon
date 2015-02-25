@@ -12,7 +12,11 @@ module Teammaker
 		pokemon = pokemon.capitalize
 		text = ""
 		movesets = Smogon::Movesetdex.get pokemon, tier, gen
-		if (!movesets[0].nil?)
+		if(movesets == nil)
+			puts "#{pokemon} is not a pokemon!"
+			return ""
+		end
+		if (!movesets.empty?)
 			moveset = movesets[0]
 			text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 					"Ability: #{moveset.ability[0]}\n" \
@@ -25,7 +29,7 @@ module Teammaker
 			puts text
 		else
 			movesets = Smogon::Movesetdex.get pokemon, nil, gen
-			if (!movesets[0].nil?)
+			if (!movesets.empty?)
 				moveset = movesets[0]
 				text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 						"Ability: #{moveset.ability[0]}\n" \
