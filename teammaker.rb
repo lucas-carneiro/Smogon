@@ -5,7 +5,11 @@ module Teammaker
 	# Gets a pokemon name or number and returns the first moveset for it on Smogon MovesetDex.
 	# By default, uses the OU tier and the XY metagame. Can be modified by parameters.
 	# If you set tryagain (for tier and/or gen), it will research for a moveset in any tier/gen.
-	def self.getMoveset(pokemon, tier="OU", gen="XY", tryagainTIER, tryagainGEN)
+	# Use noLC to get or discard Little Cup movesets.
+	def self.getMoveset(pokemon, tier="OU", gen="XY", noLC=true, tryagainTIER, tryagainGEN)
+		if (tier == "LC")
+			noLC = false
+		end
 		if (pokemon.respond_to?("to_i") && pokemon.to_i != 0)
 			pokemon = Tools.nationalNumToName(pokemon.to_i)
 		end
@@ -18,6 +22,10 @@ module Teammaker
 		end
 		if (!movesets.empty?)
 			moveset = movesets[0]
+			if (moveset.tier == "LC" && noLC)
+				puts "#{pokemon} is tier Little Cup!"
+				return ""
+			end
 			text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 					"Ability: #{moveset.ability[0]}\n" \
 					"EVs: #{moveset.evs}\n" \
