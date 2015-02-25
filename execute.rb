@@ -10,13 +10,25 @@ if(ARGV.empty? || ARGV[0] == "-h")
 		 "This will return a team with Venusaur, Charizard, Blastoise, Mewtwo and Mew.\n" \
 		 "For more help, read the README file."
 else
-	if(ARGV[0] == "-r" && ARGV[1] != nil && ARGV[1].to_i != 0)
-		(1..ARGV[1].to_i).each do 
-			puts "random!"
+	if(ARGV[0] == "-r")
+		prng = Random.new()
+		if (ARGV[1] != nil && ARGV[1].to_i != 0)
+			i = ARGV[1].to_i
+		else
+			i = 6
+		end
+		(1..i).each do
+			dexnumber = prng.rand(1..740)
+			pokemon = Teammaker.getMoveset(dexnumber, false, true)
+			while (pokemon == "") do
+				dexnumber = prng.rand(1..740)
+				pokemon = Teammaker.getMoveset(dexnumber, false, true)
+			end
+			team = team + pokemon
 		end
 	else
 		ARGV.each do |pokemon|
-			team = team + Teammaker.getMoveset(pokemon.to_s)
+			team = team + Teammaker.getMoveset(pokemon.to_s, false, true)
 		end
 	end
 	IO.write("team.txt", team)
