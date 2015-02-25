@@ -24,7 +24,16 @@ module Teammaker
 			return ""
 		end
 		if (!movesets.empty?)
-			moveset = movesets[0]
+			moveset = nil
+			movesets.each do |set|
+				if (set.ability[0] != nil && set.item[0] != nil && set.nature[0] != nil && set.tier != "Unreleased")
+					moveset = set
+					break
+				end
+			end
+			if (moveset == nil)
+				moveset = movesets[0]
+			end
 			if (moveset.tier == "LC" && noLC)
 				puts "#{pokemon} is tier Little Cup!"
 				return ""
