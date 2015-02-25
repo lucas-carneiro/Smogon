@@ -32,6 +32,9 @@ module Teammaker
 			if (pokemon == "Meowstic-m")
 				pokemon = "Meowstic"
 			end
+			if (moveset.ability[0] == nil)
+				moveset.ability[0] = Smogon::Pokedex.get(pokemon).abilities[0]
+			end
 			text =  "#{pokemon} @ #{moveset.item[0]}\n" \
 					"Ability: #{moveset.ability[0]}\n" \
 					"EVs: #{moveset.evs}\n" \
