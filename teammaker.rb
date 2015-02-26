@@ -21,12 +21,13 @@ module Teammaker
 		movesets = Smogon::Movesetdex.get pokemon, tier, gen
 		if(movesets == nil)
 			puts "#{pokemon} is not a pokemon!"
+			puts "Check your spelling and your GEN choice."
 			return ""
 		end
 		if (!movesets.empty?)
 			moveset = nil
 			movesets.each do |set|
-				if (set.ability[0] != nil && set.item[0] != nil && set.nature[0] != nil && set.tier != "Unreleased")
+				if (set.ability[0] != nil && set.item[0] != nil && set.nature[0] != nil)
 					moveset = set
 					break
 				end
@@ -64,6 +65,7 @@ module Teammaker
 					return getMoveset(pokemon, tier, nil, false, false)
 				end
 				puts "#{pokemon} has no movesets!"
+				puts "Change your Tier option and/or your GEN option."
 				return ""
 			end
 		end
