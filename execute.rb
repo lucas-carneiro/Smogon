@@ -21,17 +21,17 @@ else
 		dexnumbers = Array.new(i)
 		(1..i).each do
 			dexnumber = prng.rand(1..740)
-			pokemon = Teammaker.getMoveset(dexnumber, false, true)
+			pokemon = Teammaker.getMoveset(dexnumber, nil, ["XY", "BW"], true, false)
 			while (pokemon == "" || dexnumbers.include?(dexnumber)) do
 				dexnumber = prng.rand(1..740)
-				pokemon = Teammaker.getMoveset(dexnumber, false, true)
+				pokemon = Teammaker.getMoveset(dexnumber, nil, ["XY", "BW"], true, false)
 			end
 			dexnumbers << dexnumber
 			team = team + pokemon
 		end
 	else
 		ARGV.each do |pokemon|
-			team = team + Teammaker.getMoveset(pokemon.to_s, false, true)
+			team = team + Teammaker.getMoveset(pokemon.to_s, false)
 		end
 	end
 	IO.write("team.txt", team)

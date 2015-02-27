@@ -4,10 +4,12 @@ require_relative 'smogon-api/lib/smogon'
 module Teammaker
 	# Gets a pokemon name or number and returns the first moveset for it on Smogon MovesetDex.
 	# By default, uses the OU tier and the XY metagame. Can be modified by parameters.
-	# If you set tryagain (for tier and/or gen), it will research for a moveset in any tier/gen.
+	# Gen parameter can receive a string ("XY") or an array (["XY", "BW"]). It will search for a moveset respecting the array order.
+	# If you set tryagainTIER, it will search for a moveset in any tier (if dont found any set for the specified tier).
+	# If you use an array for Gen and tryagainTIER=true, first it will search in any tier. After that, will search in another gen.
 	# Use noLC to get or discard Little Cup movesets.
 	# Use random to get a random moveset between the smogon sets for that pokemon (using tier and gen)
-	def self.getMoveset(pokemon, tier="OU", gen="XY", noLC=true, random=false , tryagainTIER, tryagainGEN)
+	def self.getMoveset(pokemon, tier="OU", gen="XY", random=false, noLC=true, tryagainTIER)
 		if (tier == "LC")
 			noLC = false
 		end
@@ -19,7 +21,11 @@ module Teammaker
 			pokemon = "Meowstic-m"
 		end
 		text = ""
-		movesets = Smogon::Movesetdex.get pokemon, tier, gen
+		if (gen.is_a? Array)
+			movesets = Smogon::Movesetdex.get pokemon, tier, gen.first
+		else
+			movesets = Smogon::Movesetdex.get pokemon, tier, gen
+		end
 		if(movesets == nil)
 			puts "#{pokemon} is not a pokemon!"
 			puts "Check your spelling and your GEN choice."
@@ -60,17 +66,14 @@ module Teammaker
 			puts text
 		else
 			if (tryagainTIER)
-				if (tryagainGEN)
-					return getMoveset(pokemon, nil, nil, false, false)
-				else
-					return getMoveset(pokemon, nil, gen, false, false)
-				end
+				return getMoveset(pokemon, nil, gen, false)
 			else
-				if (tryagainGEN)
-					return getMoveset(pokemon, tier, nil, false, false)
+				if (gen.is_a?(Array) && gen.length > 1)
+					gen.delete_at(0)
+					return getMoveset(pokemon, tier, gen, false)
 				end
 				puts "#{pokemon} has no movesets!"
-				puts "Change your Tier option and/or your GEN option."
+				puts "Try another Tier/Gen!"
 				return ""
 			end
 		end
