@@ -6,7 +6,8 @@ module Teammaker
 	# By default, uses the OU tier and the XY metagame. Can be modified by parameters.
 	# If you set tryagain (for tier and/or gen), it will research for a moveset in any tier/gen.
 	# Use noLC to get or discard Little Cup movesets.
-	def self.getMoveset(pokemon, tier="OU", gen="XY", noLC=true, tryagainTIER, tryagainGEN)
+	# Use random to get a random moveset between the smogon sets for that pokemon (using tier and gen)
+	def self.getMoveset(pokemon, tier="OU", gen="XY", noLC=true, random=false , tryagainTIER, tryagainGEN)
 		if (tier == "LC")
 			noLC = false
 		end
@@ -26,10 +27,14 @@ module Teammaker
 		end
 		if (!movesets.empty?)
 			moveset = nil
-			movesets.each do |set|
-				if (set.ability[0] != nil && set.item[0] != nil && set.nature[0] != nil)
-					moveset = set
-					break
+			if(random)
+				moveset = movesets[Random.new().rand(0...movesets.length)]
+			else
+				movesets.each do |set|
+					if (set.ability[0] != nil && set.item[0] != nil && set.nature[0] != nil)
+						moveset = set
+						break
+					end
 				end
 			end
 			if (moveset == nil)
